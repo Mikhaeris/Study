@@ -1,54 +1,91 @@
 #include <fstream>
 #include <iostream>
-#include <string>
+#include <windows.h>
+#include <cctype> 
 
 using namespace std;
-
-void findSentence(ifstream fileInp) {
-	auto start = fileInp.get();
-	au
-		while (fileInp) {
-			if (static_cast<char>(fileInp.get()) == '.' || '!' || '?') {
-
-			}
-		}
-
+int skipSpaces(ifstream& file, int currentPos) {
+    char c;
+    file.clear();
+    file.seekg(currentPos);
+    while (file.get(c)) {
+        if (isspace(static_cast<unsigned char>(c))) {
+            currentPos++;
+        }
+        else {
+            break;
+        }
+    }
+    return currentPos;
 }
 
-pair<int, char*> getInfSentence(ifstream fileInp, start, finish) {
-	int lenStr = 0;
-	char* startSentence = 0
-		for (int i = 0; ; ) {
-			if ()
-		}
-
-	char* sentence = new char[lenStr];
-	for (int i = ''; i < lenStr; i++) {
-
-	}
-	return pair<int, char*>();
+char* getSentence(ifstream& file, int start, int end) {
+    int length = end - start + 1;
+    char* sentence = new char[length + 1];
+    file.clear();
+    file.seekg(start);
+    for (int i = 0; i < length; ++i) {
+        char c = file.get();
+        if (c != '\r' && c != '\n') {
+            sentence[i] = c;
+        }
+        else {
+            i--;
+        }
+    }
+    sentence[length] = '\0';
+    return sentence;
 }
 
-void putSentence(ofstream fileOut, char* sentence, int len) {
-	for (int i = 0; i < len; i++) {
-		fileOut.put(sentence[i]);
-	}
+void processFile(ifstream& input, ofstream& output) {
+    int start = 0;
+    int current = 0;
+    char c;
+
+    input.seekg(0);
+    char bom[3];
+    input.read(bom, 3);
+    if (bom[0] == '\xEF' && bom[1] == '\xBB' && bom[2] == '\xBF') {
+        start = 3;
+        current = 3;
+        cout << "BOM skipped." << endl;
+    }
+    else {
+        input.seekg(0);
+    }
+
+    input.clear();
+    while (input.get(c)) {
+        current++;
+        cout << "Char: '" << c << "' (ASCII: " << static_cast<int>(c) << ")" << endl;
+        if (c == '.' || c == '!' || c == '?') {
+            char* sentence = getSentence(input, start, current - 1);
+            cout << "Found: " << sentence << endl;
+            output << sentence << endl;
+            delete[] sentence;
+
+            start = skipSpaces(input, current);
+            current = start;
+            input.seekg(start);
+        }
+    }
 }
 
 int main() {
-	ifstream fileInp("input.txt", ios::in);
-	ofstream fileOut("otput.txt", ios::out);
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
 
-	if (!fileInp) {
-		cout << "Error file!" << endl;
-		return 1;
-	}
+    ifstream input("input.txt");
+    ofstream output("output.txt");
 
-	string line;
-	while (getline(fileInp, line)) {
-		std::cout << line << std::endl;
-	}
-	fileInp.close();
+    if (!input || !output) {
+        cout << "File error!" << endl;
+        return 1;
+    }
 
-	return 0;
+    processFile(input, output);
+
+    input.close();
+    output.close();
+    return 0;
 }
