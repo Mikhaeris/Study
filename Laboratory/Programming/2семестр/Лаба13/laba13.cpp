@@ -8,26 +8,31 @@
 //	int numCharacterBefore = 0, numCharacterAfter = 0;
 //	int sizeStr = strlen(str);
 //
+//	bool tempCharacterInStr = false;
 //	for (int i = 0; i < sizeStr; i++) {
-//		if (str[i] == '$')
+//		if (str[i] == '$') {
+//			tempCharacterInStr = true;
 //			break;
+//		}
 //		numCharacterBefore++;
+//		//cout << "C: " << numCharacterBefore << "str[i]: " << str[i]  << i << endl;
 //	}
 //
 //	numCharacterAfter = sizeStr - numCharacterBefore - 1;
-//
-//	return pair<int, int>(numCharacterBefore, numCharacterAfter);
+//	//cout << numCharacterBefore << " " << numCharacterAfter << " " << sizeStr << endl;
+//	
+//	return tempCharacterInStr ? pair<int, int>(numCharacterBefore, numCharacterAfter) : pair<int, int>(0,0);
 //}
 //
 //int main() {
-//	int N = 0;
-//	cin >> N;
+//	int sizeStr = 0;
+//	cout << "Enter size str: ";  cin >> sizeStr;
 //
-//	char* str = new char[N];
-//	cin >> str;
+//	char* str = new char[sizeStr+1];
+//	cout << "Enter str this $: "; cin >> str;
 //
 //	auto answer = numCharactersBeforeAndAfter(str);
-//	cout << "To: " << answer.first << "\nAfter: " << answer.second << endl;
+//	cout << "Before: " << answer.first << "\nAfter: " << answer.second << endl;
 //	delete[] str;
 //	return 0;
 //}
@@ -61,15 +66,15 @@
 //int main() {
 //	int sizeStr = 0;
 //
-//	cin >> sizeStr;
+//	cout << "Enter size str:"; cin >> sizeStr;
 //	cin.ignore();
 //	sizeStr++;
 //
 //	char* str = new char[sizeStr];
-//	cin.getline(str, sizeStr);
+//	cout << "Enter str this space: "; cin.getline(str, sizeStr);
 //
 //	char* strBetweenSpaces = substringBetweenSpaces(str);
-//	cout << strBetweenSpaces << endl;
+//	cout << "Word between spaces: " << strBetweenSpaces << endl;
 //	
 //	return 0;
 //}
@@ -114,14 +119,14 @@
 //
 //int main() {
 //	int sizeStr = 0;
-//	cin >> sizeStr;
+//	cout << "Enter size str: "; cin >> sizeStr;
 //	cin.ignore();
 //
 //	char* str = new char[sizeStr + 1];
-//	cin.getline(str, sizeStr + 1);
+//	cout << "Enter sentence: "; cin.getline(str, sizeStr + 1);
 //
 //	char* longestWord = findLongestWord(str);
-//	cout << longestWord << endl;
+//	cout << "The longest word in sentence: " << longestWord << endl;
 //
 //	delete[] str;
 //	delete[] longestWord;
