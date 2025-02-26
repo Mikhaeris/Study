@@ -39,8 +39,7 @@ void generateArrOfNotes(NOTE*& arrOfNote) {
 	srand(time(0));
 	int tempI = 0;
 	for (int i = 0; i < 5; i++) {
-		tempI = i;
-		tempI++;
+		tempI = i++;
 		arrOfNote[i].firstName = "test" + to_string(tempI);
 		arrOfNote[i].lastName = "test" + to_string(tempI);
 		arrOfNote[i].phoneNumber = tempI;

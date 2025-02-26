@@ -73,6 +73,9 @@ void processFile(ifstream& inputFile, ofstream& outputFile, char punctuationMark
 		}
 	}
 	outputFile << '\n';
+
+	delete answerFunc;
+	delete[] arrSentence;
 }
 
 int main() {
