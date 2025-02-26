@@ -4,6 +4,7 @@
 #include <cctype> 
 
 using namespace std;
+
 int skipSpaces(ifstream& file, int currentPos) {
     char c;
     file.clear();
