@@ -5,35 +5,24 @@
 using namespace std;
 
 //arr
-void createArr(int**& arr, int sizeArr) {
-	arr = new int* [sizeArr];
-	for (int i = 0; i < sizeArr; i++)
-		arr[i] = new int[2];
-}
-
-void deleteArr(int**& arr, int sizeArr) {
-	for (int i = 0; i < sizeArr; i++)
-		delete[] arr[i];
-	delete[] arr;
-}
-
-void generateArr(int**& arr, int sizeArr) {
+void generateArr(vector <pair<int, int>>& busyPeriod, int sizeArr) {
 	srand(time(0));
 	for (int i = 0; i < sizeArr; i++) {
-		arr[i][0] = rand() % 1440;
-		arr[i][1] = min(arr[i][0] + (rand() % 60), 1439);
+		int startBusy = rand() % 1440;
+		int finishBusy = min(startBusy + (rand() % 60), 1439);
+		busyPeriod.push_back(make_pair(startBusy, finishBusy));
 	}
 }
 
-void sortArr(int**& arr, int sizeArr) {
-	sort(arr, arr + sizeArr, [](int* a, int* b) { return a[0] < b[0]; });
+void sortArr(vector <pair<int, int>>& busyPeriod) {
+	sort(busyPeriod.begin(), busyPeriod.end());
 }
 
-void printArr(int** arr, int sizeArr) {
+void printArr(vector <pair<int, int>>& busyPeriod) {
 	cout << "------------------" << "\nBusy time: " << endl;
-	for (int i = 0; i < sizeArr; i++) {
-		int startHour = arr[i][0] / 60, startMinute = arr[i][0] % 60;
-		int finishHour = arr[i][1] / 60, finishMinute = arr[i][1] % 60;
+	for (int i = 0; i < busyPeriod.size(); i++) {
+		int startHour = busyPeriod[i].first / 60, startMinute = busyPeriod[i].first % 60;
+		int finishHour = busyPeriod[i].second / 60, finishMinute = busyPeriod[i].second % 60;
 
 		cout << (startHour < 10 ? "0" : "") << startHour << ":"
 			<< (startMinute < 10 ? "0" : "") << startMinute << " - "
@@ -43,14 +32,13 @@ void printArr(int** arr, int sizeArr) {
 }
 
 //logic 
-void setBusyPeriod(bool*& timeInDay, int** arr, int sizeArr) {
-	timeInDay = new bool[1440];
+void setBusyPeriod(bool*& timeInDay, vector <pair<int, int>>& busyPeriod, int sizeArr) {
 	for (int i = 0; i < 1440; i++) {
 		timeInDay[i] = 0;
 	}
 
 	for (int i = 0; i < sizeArr; i++) {
-		for (int j = arr[i][0]; j <= arr[i][1]; j++) {
+		for (int j = busyPeriod[i].first; j <= busyPeriod[i].second; j++) {
 			timeInDay[j] = 1;
 		}
 	}
@@ -94,20 +82,17 @@ int main() {
 	int sizeArr = 0;
 	cout << "Enter number of generations: "; cin >> sizeArr;
 
-	int** arr = nullptr;
-	createArr(arr, sizeArr);
-	generateArr(arr, sizeArr);
-	sortArr(arr, sizeArr);
-	printArr(arr, sizeArr);
+	vector <pair<int, int>> busyPeriod;
+	generateArr(busyPeriod, sizeArr);
+	sortArr(busyPeriod);
+	printArr(busyPeriod);
 
-	bool* timeInDay = nullptr;
+	bool* timeInDay = new bool[1440];
 	vector <pair<int, int>> freePeriod;
-	setBusyPeriod(timeInDay, arr, sizeArr);
+	setBusyPeriod(timeInDay, busyPeriod, sizeArr);
 	findFreePeriod(timeInDay, freePeriod);
 	printFreePeriod(freePeriod);
 
-
-	deleteArr(arr, sizeArr);
 	delete[] timeInDay;
 	return 0;
 }
