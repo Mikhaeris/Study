@@ -7,7 +7,7 @@ struct NOTE {
 	string firstName;
 	string lastName;
 	int phoneNumber;
-	int* dateOfBirth = new int[3];
+	int dateOfBirth = new int[3];
 };
 
 void createNotes(NOTE*& arrOfNote) {
