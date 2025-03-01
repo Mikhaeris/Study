@@ -33,7 +33,7 @@ void generateData(People*& arrPeople, int n) {
 void inputData(People*& arrPeople, int n) {
 	for (int i = 0; i < n; i++) {
 		cout << "Enter Last Name: "; cin.getline(arrPeople[i].lastName, 40);
-		cout << "Enter Full Name: "; cin.getline(arrPeople[i].fullName, 3);
+		cout << "Enter Full Name: "; cin.getline(arrPeople[i].fullName, 5);
 		cout << "Enter Zodiac Sign";  cin.getline(arrPeople[i].zodiacSign, 13);
 		cout << "Enter Birth Date: " << endl;
 		cout << "Enter day: ";  cin >> arrPeople[i].dateBirth[0];
@@ -54,33 +54,18 @@ void printPeople(People& people) {
 }
 
 //File
+//program one
 void createAndWriteArrPeopleInDatFile(People*& arrPeople, int n) {
 	ofstream outputFile("peoples.dat", ios::binary);
-
-	if (!outputFile.is_open()) {
-		cout << "File Error!" << endl;
-		throw runtime_error("Runtime error!");
-	}
 
 	outputFile.write((char*)arrPeople, n * sizeof(People));
 
 	outputFile.close();
 }
 
-void mappingPeople(People* arrPeopleThisZodiacSign, int tempIndexPeople, People& people) {
-	memcpy(arrPeopleThisZodiacSign[tempIndexPeople].lastName, people.lastName, 40);
-	memcpy(arrPeopleThisZodiacSign[tempIndexPeople].fullName, people.fullName, 3);
-	memcpy(arrPeopleThisZodiacSign[tempIndexPeople].zodiacSign, people.zodiacSign, 13);
-	memcpy(arrPeopleThisZodiacSign[tempIndexPeople].dateBirth, people.dateBirth, 12);
-}
-
+//program two
 pair<People*, int> findPeopleWithZodiacSign(string zodiacSign) {
 	ifstream inputFile("peoples.dat", ios::binary);
-
-	if (!inputFile.is_open()) {
-		cout << "File Error!" << endl;
-		throw runtime_error("Runtime error!");
-	}
 
 	People pl;
 	int countThisZodiacSign = 0;
@@ -94,16 +79,12 @@ pair<People*, int> findPeopleWithZodiacSign(string zodiacSign) {
 	People* arrPeopleThisZodiacSign = new People[countThisZodiacSign];
 
 	inputFile.clear();
-	inputFile.seekg(0, ios_base::end);
-	int numberOfRecords = inputFile.tellg() / sizeof(People);
-	inputFile.clear();
 	inputFile.seekg(0, ios::beg);
 
 	int tempIndexPeople = 0;
-	for (int i = 0; i < numberOfRecords; i++) {
-		inputFile.read((char*)&pl, sizeof(People));
+	while (inputFile.read((char*)&pl, sizeof(People))) {
 		if (pl.zodiacSign == zodiacSign) {
-			mappingPeople(arrPeopleThisZodiacSign, tempIndexPeople, pl);
+			arrPeopleThisZodiacSign[tempIndexPeople] = pl;
 			tempIndexPeople++;
 		}
 	}
@@ -119,6 +100,7 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
+	//program one
 	int n = 0; cout << "Enter N: "; cin >> n;
 	cin.ignore();
 
@@ -133,6 +115,8 @@ int main() {
 
 	createAndWriteArrPeopleInDatFile(arrPeople, n);
 
+
+	//program two
 	string zodiacSign = ""; cout << "\nZodiac Sign: "; cin >> zodiacSign; cout << endl;
 	pair<People*, int> answer = findPeopleWithZodiacSign(zodiacSign);
 	People* arrPeopleThisZodiacSign = answer.first;
