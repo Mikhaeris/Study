@@ -121,6 +121,7 @@ int main() {
 	pair<People*, int> answer = findPeopleWithZodiacSign(zodiacSign);
 	People* arrPeopleThisZodiacSign = answer.first;
 
+	cout << "People with " << zodiacSign << " zodiac sign:" << endl;
 	if (answer.second != 0) {
 		for (int i = 0; i < answer.second; i++) {
 			printPeople(arrPeopleThisZodiacSign[i]);

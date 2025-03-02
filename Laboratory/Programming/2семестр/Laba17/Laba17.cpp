@@ -54,7 +54,7 @@ int main() {
 	generateStack(stackFilms, n);
 	printStack(stackFilms);
 	double averageFilmsRating = countAverageFilmsRating(stackFilms);
-	cout << "Average films rating:" << averageFilmsRating << endl;
+	cout << "Average films rating: " << averageFilmsRating << endl;
 
 	cout << "Films with rating more eight: " << endl;
 	printFilmsWithRatingMoreEight(stackFilms);
