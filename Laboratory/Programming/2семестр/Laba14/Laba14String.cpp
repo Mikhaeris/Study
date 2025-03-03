@@ -34,7 +34,7 @@ pair<string*, int> processLine(ifstream& inputFile, string line) {
 		if (line[i] == '.' || line[i] == '?' || line[i] == '!') {
 			if (tempTail != " ") {
 				tempTail += tempSentence;
-				tempSentence = tempTail;
+				//tempSentence = tempTail;
 				sentences[tempCountSentences] = tempTail;
 				tempTail = " ";
 			}
@@ -73,9 +73,7 @@ void processFile(ifstream& inputFile, ofstream& outputFile, char punctuationMark
 		}
 	}
 	outputFile << '\n';
-
-	delete answerFunc;
-	delete[] arrSentence;
+	cout << "Sentences with " << punctuationMark << " add in outputFile.txt" << endl;
 }
 
 int main() {
@@ -90,7 +88,7 @@ int main() {
 		return 1;
 	}
 	else {
-		cout << "Good" << endl;
+		cout << "input and output files open good" << endl;
 	}
 
 	processFile(inputFile, outputFile, '?');
