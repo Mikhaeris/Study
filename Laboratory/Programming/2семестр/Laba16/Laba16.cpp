@@ -9,12 +9,12 @@ using namespace std;
 //People
 struct People {
 	char lastName[40];
-	char fullName[5];
+	char fullName[4];
 	char zodiacSign[13];
 	int dateBirth[3];
 };
 
-void generateData(People*& arrPeople, int n) {
+void generateData(People* arrPeople, int n) {
 
 	string arrZodiacSign[12] = {
 		"Aries", "Taurus", "Twins", "Cancer", "Lion", "Virgo", "Scales", "Scorpion", "Sagittarius", "Capricorn", "Aquarius", "Fish"
@@ -22,7 +22,7 @@ void generateData(People*& arrPeople, int n) {
 
 	for (int i = 0; i < n; i++) {
 		memcpy(arrPeople[i].lastName, ("test" + to_string(i + 1)).c_str(), 40);
-		memcpy(arrPeople[i].fullName, ("T" + to_string(i + 1)).c_str(), 5);
+		memcpy(arrPeople[i].fullName, ("T" + to_string(i + 1)).c_str(), 4);
 		memcpy(arrPeople[i].zodiacSign, arrZodiacSign[rand() % 12].c_str(), 13);
 		arrPeople[i].dateBirth[0] = 1 + rand() % 31;
 		arrPeople[i].dateBirth[1] = 1 + rand() % 12;
@@ -30,10 +30,10 @@ void generateData(People*& arrPeople, int n) {
 	}
 }
 
-void inputData(People*& arrPeople, int n) {
+void inputData(People* arrPeople, int n) {
 	for (int i = 0; i < n; i++) {
 		cout << "Enter Last Name: "; cin.getline(arrPeople[i].lastName, 40);
-		cout << "Enter Full Name: "; cin.getline(arrPeople[i].fullName, 5);
+		cout << "Enter Full Name: "; cin.getline(arrPeople[i].fullName, 4);
 		cout << "Enter Zodiac Sign";  cin.getline(arrPeople[i].zodiacSign, 13);
 		cout << "Enter Birth Date: " << endl;
 		cout << "Enter day: ";  cin >> arrPeople[i].dateBirth[0];
@@ -43,7 +43,7 @@ void inputData(People*& arrPeople, int n) {
 	}
 }
 
-void printPeople(People& people) {
+void printPeople(People people) {
 	cout << "----------------------" << endl;
 	cout << "Last Name: " << people.lastName << endl;
 	cout << "Full Name: " << people.fullName << endl;
@@ -107,6 +107,7 @@ int main() {
 	People* arrPeople = new People[n];
 
 	generateData(arrPeople, n);
+	//inputData(arrPeople, n);
 
 	for (int i = 0; i < n; i++) {
 		printPeople(arrPeople[i]);
