@@ -79,56 +79,53 @@
 //	return 0;
 //}
 
-//#include <iostream>
-//#include <cstring>
-//
-//using namespace std;
-//
-//bool checkEndOfWord(char character) {
-//	return (character == ' ' || character == '\0' || character == '.' || character == ',') ? true : false;
-//}
-//
-//char* findLongestWord(char* str) {
-//	int maxLen = 0, currentLen = 0;
-//	char* startMax = &str[0];
-//	char* finishMax = &str[0];
-//	char* currentStart = &str[0];
-//
-//	int len = strlen(str) + 1;
-//	for (int i = 0; i < len; i++) {
-//		if (checkEndOfWord(str[i])) {
-//			if (currentLen > maxLen) {
-//				maxLen = currentLen;
-//
-//				startMax = currentStart;
-//				finishMax = &str[i];
-//			}
-//			currentLen = 0;
-//			currentStart = &str[i + 1];
-//		}
-//		else {
-//			currentLen++;
-//		}
-//	}
-//	char* longestWord = new char[maxLen + 1];
-//
-//	memcpy(longestWord, startMax, maxLen);
-//	longestWord[maxLen] = '\0';
-//	return longestWord;
-//}
-//
-//int main() {
-//	int sizeStr = 0;
-//	cout << "Enter size str: "; cin >> sizeStr;
-//	cin.ignore();
-//
-//	char* str = new char[sizeStr + 1];
-//	cout << "Enter sentence: "; cin.getline(str, sizeStr + 1);
-//
-//	char* longestWord = findLongestWord(str);
-//	cout << "The longest word in sentence: " << longestWord << endl;
-//
-//	delete[] str;
-//	delete[] longestWord;
-//	return 0;
-//}
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+bool checkEndOfWord(char character) {
+	return (character == ' ' || character == '\0' || character == '.' || character == ',') ? true : false;
+}
+
+char* findLongestWord(char* str) {
+	int maxLen = 0, currentLen = 0;
+	char* startMax = &str[0];
+	char* currentStart = &str[0];
+
+	int len = strlen(str) + 1;
+	for (int i = 0; i < len; i++) {
+		if (checkEndOfWord(str[i])) {
+			if (currentLen > maxLen) {
+				maxLen = currentLen;
+				startMax = currentStart;
+			}
+			currentLen = 0;
+			currentStart = &str[i + 1];
+		}
+		else {
+			currentLen++;
+		}
+	}
+	char* longestWord = new char[maxLen + 1];
+
+	memcpy(longestWord, startMax, maxLen);
+	longestWord[maxLen] = '\0';
+	return longestWord;
+}
+
+int main() {
+	int sizeStr = 0;
+	cout << "Enter size str: "; cin >> sizeStr;
+	cin.ignore();
+
+	char* str = new char[sizeStr + 1];
+	cout << "Enter sentence: "; cin.getline(str, sizeStr + 1);
+
+	char* longestWord = findLongestWord(str);
+	cout << "The longest word in sentence: " << longestWord << endl;
+
+	delete[] str;
+	delete[] longestWord;
+	return 0;
+}
