@@ -8,6 +8,7 @@ using namespace std;
 class Maze {
 private:
 	vector<vector<int>> maze;
+	int height, width;
 
 public:
 	Maze() = default;
@@ -48,26 +49,31 @@ public:
 
 	}
 
-	void graphToMaze(const vector<vector<int>>& adjacencyList) {
-		int n = sqrt(adjacencyList.size());
-		for (int i = 0; i < adjacencyList.size(); i++) {
-			if (!adjacencyList[i].empty()) {
-				cout << "0" << " ";
+	void graphToMaze(const vector<vector<int>>& adjacencyList, int height, int width) {
+		this->height = height;
+		this->width = width;
+		initializeMaze(width);
+
+		int i = 0, j = 0, currentI = 0;
+		while (((i + 1) * (j + 1)) < adjacencyList.size()) {
+			if (!adjacencyList[currentI].empty()) {
+				maze[i][j] = 0;
 			}
 			else {
-				cout << "1" << " ";
+				maze[i][j] = 1;
 			}
 
-			if ((i + 1) % n == 0) {
-				cout << endl;
+
+			if ((j + 1) % width == 0) {
+				i++;
+				j = 0;
 			}
+			else {
+				j++;
+			}
+			currentI++;
 		}
-
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-
-			}
-		}
+		maze[height - 1][width - 1] = 1;
 	}
 
 	void printMaze() {
@@ -79,18 +85,46 @@ public:
 		}
 	}
 
+	void printMazeWithPath(vector<int> path) {
+		int countPath = 0, currenPath = 0;
+		for (int i = 0; i < maze.size(); i++) {
+			for (int j = 0; j < maze.size(); j++) {
+				if (currenPath < path.size() && countPath == path[currenPath]) {
+					if (currenPath == 0) {
+						cout << 'S' << " ";
+					}
+					else if (currenPath == path.size() - 1) {
+						cout << 'F' << " ";
+					}
+					else {
+						cout << '@' << " ";
+					}
+					currenPath++;
+				}
+				else {
+					cout << maze[i][j] << " ";
+				}
+				countPath++;
+			}
+			cout << endl;
+		}
+	}
+
 };
 
 class Graph {
 private:
 	vector<vector<int>> adjacencyList;
+	int height, width;
 
 public:
 	Graph() = default;
 
-	Graph(vector<vector<int>> vec) {
-		initializeMaze(vec.size());
+	Graph(vector<vector<int>> vec, int height, int width) {
+		this->height = height;
+		this->width = width;
 
+		initializeMaze(vec.size());
 		for (int i = 0; i < vec.size(); i++) {
 			adjacencyList[i] = vec[i];
 		}
@@ -107,6 +141,9 @@ public:
 	}
 
 	void mazeToGraph(const vector<vector<int>>& maze) {
+		height = maze.size();
+		width = maze[0].size();
+
 		int mazeSize = maze.size();
 		for (int i = 0; i < maze.size(); i++) {
 			for (int j = 0; j < maze.size(); j++) {
@@ -131,10 +168,9 @@ public:
 	}
 
 	// Bfs
-	void bfs(int start) {
-
-		// add check border and break
+	tuple<vector<int>, int, int> bfs(int start) {
 		int n = adjacencyList.size();
+		int finish = 0;
 
 		queue<int> queueBurning;
 		vector<bool> used(n);
@@ -146,31 +182,37 @@ public:
 		parent[start] = -1;
 
 		while (!queueBurning.empty()) {
-			int vecrtex = queueBurning.front();
+			int vertex = queueBurning.front();
 			queueBurning.pop();
 
-			for (int i = 0; i < adjacencyList[vecrtex].size(); i++) {
-				int currentVertex = adjacencyList[vecrtex][i];
+
+			if (((vertex + 1) % width == 0) || (vertex % width == 0) || ((vertex - width) < 0) || ((vertex + width) > (width * height))) {
+				finish = vertex;
+				break;
+			}
+
+			for (int i = 0; i < adjacencyList[vertex].size(); i++) {
+				int currentVertex = adjacencyList[vertex][i];
 				if (!used[currentVertex]) {
 					used[currentVertex] = true;
 					queueBurning.push(currentVertex);
-					length[currentVertex] = length[vecrtex] + 1;
-					parent[currentVertex] = vecrtex;
+					length[currentVertex] = length[vertex] + 1;
+					parent[currentVertex] = vertex;
 				}
 			}
 		}
 
-		//int to = 15;
-		int to = 41;
-		if (!used[to])
+		if (!used[finish]) {
 			cout << "No path!" << endl;
+		}
 		else {
 			vector<int> path;
-			for (int v = to; v != -1; v = parent[v]) {
+			for (int v = finish; v != -1; v = parent[v]) {
 				path.push_back(v);
 			}
 
 			reverse(path.begin(), path.end());
+			return make_tuple(path, height, width);
 			cout << "Path: ";
 			for (size_t i = 0; i < path.size(); ++i) {
 				cout << path[i] << " ";
@@ -201,7 +243,7 @@ int main() {
 
 	Maze maze({
 		{1,1,1,1,1,1,1},
-		{0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,1},
 		{1,0,1,1,1,0,1},
 		{1,0,0,0,1,0,1},
 		{1,1,1,1,1,0,1},
@@ -234,13 +276,16 @@ int main() {
 
 	Graph graph;
 	graph.mazeToGraph(maze.getLinkMaze());
-	graph.printGraph();
-	cout << "-----------" << endl;
+	//graph.printGraph();
+	//cout << "-----------" << endl;
 
-	graph.bfs(7);
+	//int start = 0; cout << "Enter start position: "; cin >> start;
+	auto path = graph.bfs(8);
 
 	Maze maze1;
-	maze1.graphToMaze(graph.getLinkGraph());
-	maze1.printMaze();
+	maze1.graphToMaze(graph.getLinkGraph(), get<1>(path), get<2>(path));
+	//maze1.printMaze();
+	maze1.printMazeWithPath(get<0>(path));
+
 	return 0;
 }
