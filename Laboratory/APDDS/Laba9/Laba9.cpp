@@ -33,7 +33,9 @@ public:
 	}
 
 	void getQueue() {
-		for ()
+		for (int i = 0; i < numberDays / averageRepairTime; i++) {
+
+		}
 	}
 };
 
