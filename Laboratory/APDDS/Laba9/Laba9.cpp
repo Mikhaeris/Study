@@ -1,11 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
 class Enterprise {
 private:
 	vector<vector<int>> masterWork;
+	queue<int> queueProducts;
 	int workers;
 	int speedProductAdd;
 	int averageRepairTime;
@@ -32,16 +34,39 @@ public:
 		cout << "Enter number days: "; cin >> numberDays;
 	}
 
-	void getQueue() {
-		for (int i = 0; i < numberDays / averageRepairTime; i++) {
+	int getQueue() {
+		for (int i = 0; i < numberDays; i++) {
+			for (int j = 0; j < speedProductAdd; j++) {
+				queueProducts.push(i);
+			}
+
+			for (int j = 0; j < masterWork.size(); j++) {
+				if (!masterWork[j].empty()) {
+					masterWork[j].erase(masterWork[j].begin());
+					if (masterWork[j].empty()) {
+						if (!queueProducts.empty()) {
+							masterWork[j].push_back(queueProducts.front());
+							queueProducts.pop();
+						}
+					}
+				}
+				else {
+					if (!queueProducts.empty()) {
+						masterWork[j].push_back(queueProducts.front());
+						queueProducts.pop();
+					}
+				}
+			}
 
 		}
+
+		return queueProducts.size();
 	}
 };
 
 int main() {
 	Enterprise enterprise;
-
 	enterprise.enterStartParameters();
+	cout << enterprise.getQueue() << endl;
 
 }
