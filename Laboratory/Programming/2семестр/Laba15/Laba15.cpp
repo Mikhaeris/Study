@@ -10,7 +10,7 @@ struct NOTE {
 	int dateOfBirth[3];
 };
 
-void inputArrOfNotes(NOTE*& arrOfNote) {
+void inputArrOfNotes(NOTE* arrOfNote) {
 	cout << "----------------------------" << endl;
 	for (int i = 0; i < 5; i++) {
 		cout << "Enter FirstName: "; cin >> arrOfNote[i].firstName;
@@ -27,7 +27,7 @@ void inputArrOfNotes(NOTE*& arrOfNote) {
 	}
 }
 
-void generateArrOfNotes(NOTE*& arrOfNote) {
+void generateArrOfNotes(NOTE* arrOfNote) {
 	srand(time(0));
 	for (int i = 0; i < 5; i++) {
 		arrOfNote[i].firstName = "test" + to_string(i + 1);
@@ -39,7 +39,7 @@ void generateArrOfNotes(NOTE*& arrOfNote) {
 	}
 }
 
-void printNote(NOTE*& arrOfNotes, int number) {
+void printNote(NOTE* arrOfNotes, int number) {
 	cout << "\n------------------------------------" << endl;
 	cout << "Note: " << number + 1 << endl;
 	cout << "FirstName: " << arrOfNotes[number].firstName << endl;
@@ -51,7 +51,7 @@ void printNote(NOTE*& arrOfNotes, int number) {
 	cout << "\n------------------------------------" << endl;
 }
 
-void findPeopleThisSameBirthsday(NOTE*& arrOfNote) {
+void findPeopleThisSameBirthsday(NOTE* arrOfNote) {
 	int date[3];
 	cout << "Enter a date: ";
 	cout << "\nEnter day: "; cin >> date[0];
@@ -73,6 +73,7 @@ void findPeopleThisSameBirthsday(NOTE*& arrOfNote) {
 int main() {
 
 	NOTE* arrOfNote = new NOTE[5];
+
 	//inputArrOfNotes(arrOfNote);
 	generateArrOfNotes(arrOfNote);
 	/*for (int i = 0; i < 5; i++) {
@@ -83,6 +84,24 @@ int main() {
 	delete[] arrOfNote;
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #include <iostream>
 
