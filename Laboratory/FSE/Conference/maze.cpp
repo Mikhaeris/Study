@@ -15,6 +15,10 @@ protected:
 public:
 	Graph() = default;
 
+	virtual void mazeToGraph(const vector<vector<int>>& maze) = 0;
+
+	virtual void printGraph() const = 0;
+
 };
 
 class WeightedGraph : public Graph {
@@ -25,7 +29,7 @@ public:
 
 	WeightedGraph() = default;
 
-	void mazeToGraph(vector<vector<int>> startMatrix) {
+	void mazeToGraph(const vector<vector<int>>& startMatrix) override {
 		height = startMatrix.size();
 		width = startMatrix[0].size();
 
@@ -50,6 +54,38 @@ public:
 			}
 		}
 	}
+
+	/*pair<vector<vector<int>>, pair<int, int>> mstGraphTest() {
+		int n = height*width;
+		const int INF = INT_MAX;
+
+		vector<int> min_e(n, INF), sel_e(n, -1);
+		min_e[0] = 0;
+		set < pair<int, int> > q;
+		q.insert(make_pair(0, 0));
+		for (int i = 0; i < n; ++i) {
+			if (q.empty()) {
+				cout << "No MST!";
+				exit(0);
+			}
+			int v = q.begin()->second;
+			q.erase(q.begin());
+
+			if (sel_e[v] != -1)
+				cout << v << " " << sel_e[v] << endl;
+
+			for (size_t j = 0; j < adjacencyListWithWeight[v].size(); ++j) {
+				int to = adjacencyListWithWeight[v][j].first,
+					cost = adjacencyListWithWeight[v][j].second;
+				if (cost < min_e[to]) {
+					q.erase(make_pair(min_e[to], to));
+					min_e[to] = cost;
+					sel_e[to] = v;
+					q.insert(make_pair(min_e[to], to));
+				}
+			}
+		}
+	}*/
 
 	pair<vector<vector<int>>, pair<int, int>> mstGraph() {
 		int n = height * width;
@@ -100,7 +136,7 @@ public:
 		return make_pair(MST, make_pair(height, width));
 	}
 
-	void printGraph() {
+	void printGraph() const override {
 		int count = 0;
 		for (auto i : adjacencyListWithWeight) {
 			cout << count << ": ";
@@ -132,7 +168,7 @@ public:
 		return adjacencyList;
 	}
 
-	void mazeToGraph(const vector<vector<int>>& maze) {
+	void mazeToGraph(const vector<vector<int>>& maze) override {
 		height = maze.size();
 		width = maze[0].size();
 
@@ -178,7 +214,6 @@ public:
 			int vertex = queueBurning.front();
 			queueBurning.pop();
 
-
 			if (vertex != start && (((vertex + 1) % width == 0) || (vertex % width == 0) || ((vertex - width) < 0) || ((vertex + width) >= (width * height)))) {
 				finish = vertex;
 				break;
@@ -215,7 +250,7 @@ public:
 		}
 	}
 
-	void printGraph() {
+	void printGraph() const override {
 		for (int i = 0; i < adjacencyList.size(); i++) {
 			cout << i << ": ";
 			for (int j = 0; j < adjacencyList[i].size(); j++) {
@@ -225,7 +260,6 @@ public:
 		}
 	}
 };
-
 
 class Maze {
 private:
@@ -282,10 +316,22 @@ public:
 		auto answer = tempGraph.mstGraph();
 
 		mstGraphToMaze(answer.first, answer.second.first, answer.second.second);
-
 	}
 
+	void generateMazeWithParameters(int height, int width) {
+		int countHeightVertex = height / 2;
+		int countWidthVertex = width / 2;
 
+		vector<vector<int>> startMatrix(countHeightVertex, vector<int>(countWidthVertex, 0));
+
+		WeightedGraph tempGraph;
+		tempGraph.mazeToGraph(startMatrix);
+		//tempGraph.printGraph();
+
+		auto answer = tempGraph.mstGraph();
+
+		mstGraphToMaze(answer.first, answer.second.first, answer.second.second);
+	}
 
 	void mstGraphToMaze(const vector<vector<int>>& adjacencyList, int height, int width) {
 		this->height = height * 2 - 1;
@@ -323,7 +369,6 @@ public:
 				aL++;
 			}
 		}
-
 
 		this->height = this->height + 2;
 		this->width = this->width + 2;
@@ -431,7 +476,6 @@ public:
 
 };
 
-
 int main() {
 	SetConsoleOutputCP(CP_UTF8);
 
@@ -441,6 +485,10 @@ int main() {
 
 	Maze maze;
 	maze.generateMaze();
+
+	/*int height = 0, width = 0; cout << "Enter height and width: "; cin >> height >> width;
+	maze.generateMazeWithParameters(height, width);*/
+
 	maze.printMaze();
 	cout << "-----------" << endl;
 
