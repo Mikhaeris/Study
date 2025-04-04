@@ -7,13 +7,17 @@ using namespace std;
 
 int main() {
 	string str; cout << "Enter str: "; getline(cin, str);
+	str.erase(remove_if(str.begin(), str.end(), isspace), str.end());
+
 	//string str = "ACGTA";
 	int strSize = str.size();
 
+	int numberReps = 0; cout << "Enter numberReps: "; cin >> numberReps;
+
 	map<string, int> mapSubString;
 
-	int countCharacter = 1; string tempStrS;
-	while (countCharacter != strSize + 1) {
+	int countCharacter = strSize; string tempStrS; int flag = false;
+	while (countCharacter != 0) {
 		for (int i = 0; i < strSize; i++) {
 
 			if (i + countCharacter > strSize) continue;
@@ -27,24 +31,19 @@ int main() {
 			else
 				mapSubString[tempStrS] = mapSubString[tempStrS] + 1;
 
+			if (mapSubString[tempStrS] == numberReps) {
+				cout << tempStrS << endl;
+				flag = true;
+				break;
+			}
+
 			delete[] tempStr;
 		}
-		countCharacter++;
+		if (flag == true) break;
+		countCharacter--;
 	}
 
-	int numberReps = 0; cout << "Enter numberReps: "; cin >> numberReps;
-
-	string bestSubStr = "";
-	for (const auto& elem : mapSubString) {
-		if (elem.second == numberReps) {
-			if (bestSubStr.size() < elem.first.size()) {
-				bestSubStr = elem.first;
-			}
-		}
-	}
-
-	if (!bestSubStr.empty()) cout << bestSubStr << endl;
-	else cout << "That's not" << endl;
+	if (!flag) cout << "Dont have" << endl;
 
 	return 0;
 }

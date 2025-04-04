@@ -15,18 +15,21 @@ bool checkLineCrossing(const DirVec& dirF, const DirVec& dirS) {
     return (dirF.dirX * dirS.dirY - dirF.dirY * dirS.dirX) != 0;
 }
 
-int countAreas(vector<DirVec>& lines, DirVec& firstLine) {
+int countAreas(vector<pair<DirVec, bool>>& lines, DirVec& firstLine) {
     int countPoint = 0;
     for (const auto& senondLine : lines) {
-        if (!(firstLine == senondLine) && checkLineCrossing(firstLine, senondLine))
+        if (!(firstLine == senondLine.first) && checkLineCrossing(firstLine, senondLine.first) && secondLine.second == false) {
             countPoint++;
+            secondLine.second = true;
+        }
     }
-    return countPoint != 0 ? countPoint + 1 : 2;
+
+    return countPoint;
 }
 
 int main() {
-    int countGlobalAreas = 0;
-    vector<DirVec> lines;
+    int countGlobalPoints = 0;
+    vector<pair<DirVec, bool>> lines;
 
     int countLine = 0; cout << "Enter N: "; cin >> countLine;
 
@@ -35,10 +38,10 @@ int main() {
         cin >> tempY1 >> tempY2;
         DirVec newLine{ 5, tempY2 - tempY1 };
 
-        countGlobalAreas += countAreas(lines, newLine);
+        countGlobalPoints += countAreas(lines, newLine);
         lines.push_back(newLine);
     }
 
-    cout << countGlobalAreas << endl;
+    cout << (countLine - 1) + countGlobalPoints + 1 << endl;
     return 0;
 }
