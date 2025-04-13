@@ -122,3 +122,129 @@
 //}
 
 
+//ThirdTask
+//#include <fstream>
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//
+//using namespace std;
+//
+//struct Matrix {
+//	vector<vector<int>> vecMatrix;
+//};
+//
+//void putMatrixInFile(fstream& outFileMatrix, vector<Matrix>& vecMatrix, int countMatrix) {
+//	for (int i = vecMatrix.size() - countMatrix; i < vecMatrix.size(); i++) {
+//		for (int j = 0; j < vecMatrix[i].vecMatrix.size(); j++) {
+//			for (int k = 0; k < vecMatrix[i].vecMatrix[j].size(); k++) {
+//				outFileMatrix << vecMatrix[i].vecMatrix[j][k] << " ";
+//			}
+//			outFileMatrix << "\n";
+//		}
+//		outFileMatrix << "\n";
+//	}
+//}
+//
+//void getAllMatrixFromFile(fstream& inFileMatrix, vector<Matrix>& vecMatrix) {
+//	Matrix tempMatrix; string line;
+//	while (getline(inFileMatrix, line)) {
+//
+//		if (line == "") {
+//			vecMatrix.push_back(tempMatrix);
+//			tempMatrix.vecMatrix = {};
+//			continue;
+//		}
+//
+//		vector<int> matrixRow;
+//		string number; int countNumber = 0;
+//		for (auto& character : line) {
+//
+//			if (character != ' ') {
+//				number.push_back(character);
+//			}
+//			else {
+//				matrixRow.push_back(stoi(number));
+//				number = ""; countNumber++;
+//			}
+//		}
+//		tempMatrix.vecMatrix.push_back(matrixRow);
+//	}
+//	vecMatrix.push_back(tempMatrix);
+//}
+//
+//void deleteMatrixInFile(string filename, vector<Matrix>& vecMatrix, int countMatrix) {
+//	ofstream outFileMatrix(filename, std::ios::trunc); int tempCount = 0;
+//	for (auto& matrix : vecMatrix) {
+//		for (int i = 0; i < matrix.vecMatrix.size(); i++) {
+//			for (int j = 0; j < matrix.vecMatrix[i].size(); j++) {
+//				outFileMatrix << matrix.vecMatrix[i][j] << " ";
+//			}
+//			outFileMatrix << '\n';
+//		}
+//		outFileMatrix << '\n';
+//		tempCount++;
+//		if (vecMatrix.size() - countMatrix == tempCount)
+//			break;
+//	}
+//	outFileMatrix.close();
+//}
+//
+//void printFile(string filename) {
+//	ifstream inFileMatrix(filename);
+//	string line;
+//	while (getline(inFileMatrix, line)) {
+//		cout << line << endl;
+//	}
+//	inFileMatrix.close();
+//}
+//
+//int main() {
+//	cout << "Start:" << endl;
+//	cout << "File1:" << endl;
+//	printFile("file1Matrix.txt");
+//	cout << "--------------" << endl;
+//	cout << "File2:" << endl;
+//	printFile("file2Matrix.txt");
+//	cout << "--------------" << endl;
+//	cout << "File3:" << endl;
+//	printFile("file3Matrix.txt");
+//	cout << "--------------" << endl;
+//	cout << "--------------" << endl;
+//
+//	fstream inFile1Matrix("file1Matrix.txt");
+//	if (!inFile1Matrix) return 1;
+//	vector<Matrix> vec1Matrix;
+//	getAllMatrixFromFile(inFile1Matrix, vec1Matrix);
+//	inFile1Matrix.close();
+//
+//	fstream inFile2Matrix("file2Matrix.txt");
+//	if (!inFile2Matrix) return 1;
+//	vector<Matrix> vec2Matrix;
+//	getAllMatrixFromFile(inFile2Matrix, vec2Matrix);
+//	inFile2Matrix.close();
+//
+//	fstream inFile3Matrix("file3Matrix.txt");
+//	if (!inFile3Matrix) return 1;
+//
+//	if (vec1Matrix.size() > vec2Matrix.size()) {
+//		deleteMatrixInFile("file1Matrix.txt", vec1Matrix, vec1Matrix.size() - vec2Matrix.size());
+//		putMatrixInFile(inFile3Matrix, vec1Matrix, vec1Matrix.size() - vec2Matrix.size());
+//	}
+//	else {
+//		deleteMatrixInFile("file2Matrix.txt", vec2Matrix, vec2Matrix.size() - vec1Matrix.size());
+//		putMatrixInFile(inFile3Matrix, vec2Matrix, vec2Matrix.size() - vec1Matrix.size());
+//	}
+//	inFile3Matrix.close();
+//
+//	cout << "End:" << endl;
+//	cout << "File1:" << endl;
+//	printFile("file1Matrix.txt");
+//	cout << "--------------" << endl;
+//	cout << "File2:" << endl;
+//	printFile("file2Matrix.txt");
+//	cout << "--------------" << endl;
+//	cout << "File3:" << endl;
+//	printFile("file3Matrix.txt");
+//	cout << "--------------" << endl;
+//}
