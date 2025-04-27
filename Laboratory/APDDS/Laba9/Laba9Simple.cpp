@@ -145,3 +145,83 @@
 //
 //	return 0;
 //}
+
+// Third realesation dinamyc struct quque
+//#include <iostream>
+//#include <vector>
+//
+//using namespace std;
+//
+//struct Worker {
+//	int workerFree;
+//	int workerTime;
+//};
+//
+//struct Detail {
+//	int number;
+//	Detail* next;
+//	int timeInQueue;
+//};
+//
+//void addToQueue(Detail* tail, int &kDetail) {
+//	Detail newDetail = {
+//		kDetail,
+//		,
+//		0
+//	}
+//
+//	*tail->next = &newDetail;
+//}
+//
+//void shiftQueue(Detail &detail, Detail* index) {
+//	Detail* next = detail.next;
+//	while (next != nullptr) {
+//		if (*index == next) {
+//			*index = next;
+//		}
+//		next = *next->next;
+//	}
+//
+//}
+//
+//int main() {
+//	const int countWorkers = 1;
+//	const int pump = 4;
+//	const int timeDetail = 10;
+//	const int countHours = 60;
+//
+//	int kDetail = 0;
+//
+//	Detail detail = { kDetail, nullptr , 0 };
+//	Detail* tail = &detail;
+//	Detail* index = tail;
+//
+//	Worker worker = { true, 0};
+//
+//	for (int hour = 0; hour < countHours; hour++) {
+//		if (hour % pump == 1) {
+//			kDetail++;
+//			addToQueue(tail, kDetail);
+//		}
+//
+//		if (worker.workerTime == timeDetail) {
+//			worker.workerFree = true;
+//			worker.workerTime = 0;
+//		}
+//
+//		if (!worker.workerFree) {
+//			worker.workerTime++;
+//		}
+//
+//		if (worker.workerFree) {
+//			shiftQueue(detail, index);
+//			worker.workerFree = false;
+//			worker.workerTime = 1;
+//		}
+//	}
+//
+//
+//
+//
+//	return 0;
+//}
