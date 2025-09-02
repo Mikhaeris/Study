@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Repository">
+      <UniqueIdentifier>{f3100bcd-527e-4e1a-98e3-8e18e9ee60ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InitData">
+      <UniqueIdentifier>{dee89374-5b40-401f-b378-edd81e16c1d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\CustomDataBase">
+      <UniqueIdentifier>{08157b03-99ab-4739-9c6e-30abd37e0ced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\DataStorageStructure">
+      <UniqueIdentifier>{35148ad3-b939-4af4-ad5b-517c882b70ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\InitData">
+      <UniqueIdentifier>{b1d9d0a9-a21c-41ce-a384-d7e0e6455ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Repository">
+      <UniqueIdentifier>{8d383c85-9efd-40ce-9b26-06584e4aa3ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{ca8b6f85-853d-4d2c-83eb-629bf17b42cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{12fc844b-bbc3-4bac-84ae-bf220a1d9460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Models">
+      <UniqueIdentifier>{3b53b0a0-74ce-47f5-9157-e3cba55b15ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UserInterface">
+      <UniqueIdentifier>{363b4d76-0414-4f0f-a8a4-066ba29aabeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UserInterface">
+      <UniqueIdentifier>{7b5f3b8e-b330-43ae-a7cc-f27480ed251b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UserInterface\Utils">
+      <UniqueIdentifier>{b05ce8a2-e37a-4f55-a89f-0f4c51246849}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UserInterface\Utils">
+      <UniqueIdentifier>{b7821271-0be7-489f-af23-004f52a552f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Repository\FileParser">
+      <UniqueIdentifier>{09d80f14-0df7-4fc2-aaf7-b5c659f53384}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Repository\FileParser">
+      <UniqueIdentifier>{b23882dc-6744-4513-9a43-d46ae38e194e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UserInterface\Interfaces">
+      <UniqueIdentifier>{37117f1f-1ad7-4e5d-9da7-e035b104f03e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UserInterface\Interfaces">
+      <UniqueIdentifier>{9e2bcb06-ed97-40a1-bdb7-a0e232e24ef3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source Files\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Repository\ClientRepository.cpp">
+      <Filter>Source Files\Repository</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\InitData\ClientSeed.cpp">
+      <Filter>Source Files\InitData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Services\ClientService.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\InitData\DriverSeed.cpp">
+      <Filter>Source Files\InitData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Repository\DriverRepository.cpp">
+      <Filter>Source Files\Repository</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Services\DriverService.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Repository\OrderRepository.cpp">
+      <Filter>Source Files\Repository</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\InitData\OrderSeed.cpp">
+      <Filter>Source Files\InitData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Services\OrderService.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Repository\FileParser\FileParser.cpp">
+      <Filter>Source Files\Repository\FileParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\UserInterface\UserInterface.cpp">
+      <Filter>Source Files\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\UserInterface\Utils\PrintModel.cpp">
+      <Filter>Source Files\UserInterface\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\UserInterface\Interfaces\ClientInterface.cpp">
+      <Filter>Source Files\UserInterface\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\UserInterface\Interfaces\DriverInterface.cpp">
+      <Filter>Source Files\UserInterface\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\UserInterface\Interfaces\OrderInterface.cpp">
+      <Filter>Source Files\UserInterface\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\UserInterface\Utils\OtherUtils.cpp">
+      <Filter>Source Files\UserInterface\Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Header Files\Models\Address.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Models\Car.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Models\Client.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Repository\ClientRepository.h">
+      <Filter>Header Files\Repository</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\InitData\ClientSeed.h">
+      <Filter>Header Files\InitData</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Services\ClientService.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Models\Driver.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Repository\DriverRepository.h">
+      <Filter>Header Files\Repository</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\InitData\DriverSeed.h">
+      <Filter>Header Files\InitData</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Services\DriverService.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Models\Order.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Repository\OrderRepository.h">
+      <Filter>Header Files\Repository</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\InitData\OrderSeed.h">
+      <Filter>Header Files\InitData</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Services\OrderService.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\UserInterface\UserInterface.h">
+      <Filter>Header Files\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Repository\FileParser\FileParser.h">
+      <Filter>Header Files\Repository\FileParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\UserInterface\Utils\PrintModel.h">
+      <Filter>Header Files\UserInterface\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\UserInterface\Interfaces\DriverInterface.h">
+      <Filter>Header Files\UserInterface\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\UserInterface\Interfaces\ClientInterface.h">
+      <Filter>Header Files\UserInterface\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\UserInterface\Interfaces\OrderInterface.h">
+      <Filter>Header Files\UserInterface\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\UserInterface\Utils\OtherUtils.h">
+      <Filter>Header Files\UserInterface\Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource Files\CustomDataBase\clients.txt">
+      <Filter>Resource Files\CustomDataBase</Filter>
+    </Text>
+    <Text Include="Resource Files\CustomDataBase\drivers.txt">
+      <Filter>Resource Files\CustomDataBase</Filter>
+    </Text>
+    <Text Include="Resource Files\CustomDataBase\orders.txt">
+      <Filter>Resource Files\CustomDataBase</Filter>
+    </Text>
+    <Text Include="Resource Files\DataStorageStructure\ClientStructure.txt">
+      <Filter>Resource Files\DataStorageStructure</Filter>
+    </Text>
+    <Text Include="Resource Files\DataStorageStructure\DriverStructure.txt">
+      <Filter>Resource Files\DataStorageStructure</Filter>
+    </Text>
+    <Text Include="Resource Files\DataStorageStructure\OrderStructure.txt">
+      <Filter>Resource Files\DataStorageStructure</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.gitignore" />
+  </ItemGroup>
+</Project>
