@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#define MAX_SIZE 22ULL
+#define MAX_SIZE 12ULL
 
 void print_arr(uint64_t *arr, size_t _size);
 
@@ -17,7 +17,6 @@ int main() {
     /* generate arr with two max zero elemants */
     fill_arr(arr, MAX_SIZE);
     shuffle_arr(arr, MAX_SIZE);
-    del_twomel(arr, MAX_SIZE);
 
     print_arr(arr, MAX_SIZE);
 
